@@ -19,7 +19,7 @@ func NewEngine(addr string) error {
 }
 
 func syncModels() error {
-	err := engine.Sync(new(Task))
+	err := engine.Sync(new(Date), new(Task))
 	if err != nil {
 		return fmt.Errorf("xorm sync failed, error: %s", err.Error())
 	}

@@ -12,10 +12,9 @@ func (d *Date) Add() error {
 	return err
 }
 
-func (d *Date) List() (err error) {
-	dList := make([]Date, 0)
+func (d *Date) List() (dList []Date, err error) {
 	if err = engine.Table("date").Find(&dList); err != nil {
-		return err
+		return
 	}
-	return nil
+	return
 }

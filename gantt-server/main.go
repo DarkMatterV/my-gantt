@@ -14,6 +14,7 @@ func init() {
 
 func main() {
 	//server := http.Server{}
+	http.Handle("/date/list", routers.HandleGetDateList())
 	http.Handle("/task/list", routers.HandleGetTaskList())
 	http.ListenAndServe("127.0.0.1:8080", nil)
 }

@@ -6,12 +6,12 @@ import (
 	"net/http"
 )
 
-func HandleGetTaskList() http.HandlerFunc {
+func HandleGetDateList() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		task := models.Task{}
-		l, err := task.List()
+		date := models.Date{}
+		l, err := date.List()
 		if err != nil {
-			_, _ = httputils.ResponseJson(w, httputils.CodeInterval, "get task list failed", nil)
+			_, _ = httputils.ResponseJson(w, httputils.CodeInterval, "get date list failed", nil)
 			return
 		}
 		_, _ = httputils.ResponseJson(w, httputils.CodeOK, "success", l)
