@@ -8,20 +8,44 @@ type Task struct {
 	PID    int64                        `xorm:"'pid'" json:"pid" form:"pid"`
 }
 
-func (t *Task) Add() error {
-	_, err := engine.Table("task").Insert(t)
+type ReqAddTask struct {
+	No     string                       `json:"no" form:"no"`
+	Title  string                       `json:"title" form:"title"`
+	Record map[string]map[string]string `json:"record" form:"record"`
+}
+
+type ReqUpdateTask struct {
+	ID     int64                        `json:"id" form:"id"`
+	No     string                       `json:"no" form:"no"`
+	Title  string                       `json:"title" form:"title"`
+	Record map[string]map[string]string `json:"record" form:"record"`
+}
+
+func (t *Task) Add(req ReqAddTask) error {
+	n := Task{
+		No:     req.No,
+		Title:  req.Title,
+		Record: req.Record,
+	}
+	_, err := engine.Table("task").Insert(&n)
 	return err
 }
 
-func (t *Task) GetByID(id int64) (info Task, exist bool, err error) {
-	exist, err = engine.Table("task").ID(id).Get()
+func (t *Task) Update(req ReqUpdateTask) error {
+	t.No = req.No
+	t.Title = req.Title
+	t.Record = req.Record
+	_, err := engine.Table("task").
+		Where("id=?", t.ID).Cols("no", "title", "record").Update(t)
+	return err
+}
+
+func (t *Task) GetByID() (info Task, exist bool, err error) {
+	exist, err = engine.Table("task").ID(t.ID).Get(&info)
 	return
 }
 
 func (t *Task) List() (l []Task, err error) {
-	tList := make([]Task, 0)
-	if err = engine.Table("task").Find(&tList); err != nil {
-		return l, err
-	}
-	return l, nil
+	err = engine.Table("task").Find(&l)
+	return l, err
 }

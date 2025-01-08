@@ -6,8 +6,9 @@ import (
 )
 
 const (
-	CodeOK       = 20000
-	CodeInterval = 50000
+	CodeOK          = 20000
+	CodeErrParams   = 50004
+	CodeErrInterval = 50000
 )
 
 func ResponseJson(w http.ResponseWriter, code int, message string, data interface{}) (int, error) {
@@ -16,9 +17,11 @@ func ResponseJson(w http.ResponseWriter, code int, message string, data interfac
 	w.Header().Set("Content-Type", "application/json")
 
 	d := map[string]interface{}{
-		"code":    200,
+		"code":    code,
 		"message": message,
-		"data":    data,
+	}
+	if data != nil {
+		d["data"] = data
 	}
 	jsonData, err := json.Marshal(d)
 	if err != nil {
