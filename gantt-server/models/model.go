@@ -15,7 +15,7 @@ func NewEngine(addr string) error {
 		return fmt.Errorf("xorm NewEngine failed, error: %s", err.Error())
 	}
 	err = syncModels()
-	return nil
+	return err
 }
 
 func syncModels() error {

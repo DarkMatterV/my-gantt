@@ -10,8 +10,9 @@ import (
 func HandleGetTaskList() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		task := models.Task{}
-		l, err := task.List()
+		l, err := task.ListTree()
 		if err != nil {
+			panic(err)
 			_, _ = httputils.ResponseJson(w, httputils.CodeErrInterval, "get task list failed", nil)
 			return
 		}
