@@ -7,16 +7,17 @@ export function getTaskList() {
     })
 }
 
-export function addTask() {
+export function addTask(data) {
     return request({
         url: '/task/add',
-        method: 'post'
+        method: 'post',
+        data
     })
 }
 
 export function updateTask() {
     return request({
-        url: '/task/update',
+        url: '/date/update',
         method: 'put'
     })
 }

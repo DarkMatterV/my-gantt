@@ -12,7 +12,6 @@ func HandleGetTaskList() http.HandlerFunc {
 		task := models.Task{}
 		l, err := task.ListTree()
 		if err != nil {
-			panic(err)
 			_, _ = httputils.ResponseJson(w, httputils.CodeErrInterval, "get task list failed", nil)
 			return
 		}

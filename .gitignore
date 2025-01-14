@@ -34,3 +34,6 @@ coverage
 
 *.db
 
+gantt-server/config/config.json
+
+

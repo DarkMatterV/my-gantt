@@ -1,0 +1,5 @@
+{
+  "database": {
+    "addr": "./data/task.db"
+  }
+}
