@@ -6,7 +6,9 @@ import (
 )
 
 func init() {
-	NewEngine("../data/task.db")
+	if err := NewEngine("../data/task.db"); err != nil {
+		panic(err)
+	}
 }
 
 func TestTask_List(t *testing.T) {

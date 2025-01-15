@@ -14,7 +14,7 @@ const (
 func ResponseJson(w http.ResponseWriter, code int, message string, data interface{}) (int, error) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 
 	d := map[string]interface{}{
 		"code":    code,

@@ -6,7 +6,7 @@ type Task struct {
 	Title  string                       `xorm:"'title' notnull longtext" json:"title" form:"title"`
 	Status string                       `xorm:"'status'" json:"status" form:"status"`
 	Record map[string]map[string]string `xorm:"'record' longtext" json:"record" form:"record"`
-	PID    int64                        `xorm:"'pid'" json:"pid" form:"pid"`
+	PID    int64                        `xorm:"'pid' default 0" json:"pid" form:"pid"`
 }
 
 type ReqAddTask struct {
